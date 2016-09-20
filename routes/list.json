@@ -1,23 +1,26 @@
 [
   {
-    "project": "sss",
-    "buid": [
+    "project": "onni",
+    "builds": [
       {
+        "ipaName": "onni-34",
         "link": "sd",
-        "v": 2
+        "version": "2.0.6"
       }
     ]
   },
   {
-    "project": "xxx",
-    "buid": [
+    "project": "pdoc-ios",
+    "builds": [
       {
+        "ipaName": "pdoc-ios-78",
         "link": "jkdjdj",
-        "v": 5
+        "version": "5.1.1"
       },
       {
+        "ipaName": "pdoc-ios-444",
         "link": "iiiii",
-        "v": 5.8
+        "version": "5.8.0"
       }
     ]
   }
