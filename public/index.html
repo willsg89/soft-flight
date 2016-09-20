@@ -7,53 +7,7 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
-		<script type="text/javascript">
-			$(function() {
-				loadTabsProjects();
-			});
-
-			function loadTabsProjects() {
-				$.getJSON("http://localhost:3000/api/xxx", function( data ) {
-				
-					var projects = [];
-					var details = [];
-					$.each( data, function( key, val ) {
-						projects.push(makeTabProject(val.project));
-						details.push(makeDetailTable(val));
-					});
-				
-					$("#tab-projects").empty();
-					$("#tab-projects").append(projects);
-					$("#tab-details").append(details);
-				});
-			}
-
-			function makeTabProject(title) {
-				return "<li><a data-toggle=\"pill\" href=\"#"+title+"\">"+title+"</a></li>"
-			}
-
-			function makeDetailTable(val) {
-
-				var trs = [];
-				$.each( val.builds, function( key, detail ) {
-					trs.push(	"<tr>                            " +
-								"	<td>"+detail.ipaName+"</td> " +
-								"	<td>"+detail.link+"</td>     " +
-								"	<td>"+detail.version+"</td>  " +
-								"</tr> ");
-				});
-
-
-				return 	"<div id=\""+val.project+"\" class=\"tab-pane fade\"> " +
-					   	"	<table class=\"table table-hover\">      " +
-						"	    <tbody>                            " +
-						trs + 
-						"	    </tbody>                           " +
-						"	</table>                               " +
-						"</div>                                    ";
-			}						
-		</script>
+		<script src="index.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -61,7 +15,6 @@
 			<ul id="tab-projects" class="nav nav-pills">
 				Loading...
 			</ul>
-			
 			<div id="tab-details" class="tab-content">
 			</div>
 		</div>
