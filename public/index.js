@@ -13,8 +13,12 @@
 			});
 		
 			$("#tab-projects").empty();
-			$("#tab-projects").append(projects);
-			$("#tab-details").append(details);
+			$.each(projects, function(i,val) {
+				$("#tab-projects").append(val);
+			});
+			$.each(details, function(i,val) {
+				$("#tab-details").append(val);
+			});
 		});
 	}
 
@@ -24,22 +28,21 @@
 
 	function makeDetailTable(val) {
 
-		var trs = [];
+		var trs = new String();
 		$.each( val.builds, function( key, detail ) {
-			trs.push(	"<tr>                            " +
+			trs  = trs.concat(	"<tr>                            " +
 						"	<td>"+detail.ipaName+"</td> " +
 						"	<td>"+detail.link+"</td>     " +
 						"	<td>"+detail.version+"</td>  " +
-						"	<td><a>"+'detail.version'+"</a></td>  " +
+						"	<td> <a> <img src=\"ios.png\" </img> </a> </td>  " +
 						"</tr> ");
 		});
 
-
 		return 	"<div id=\""+val.project+"\" class=\"tab-pane fade\"> " +
-			   	"	<table class=\"table table-hover\">      " +
+				"	<table class=\"table table-hover\">      " +
 				"	    <tbody>                            " +
 				trs + 
 				"	    </tbody>                           " +
 				"	</table>                               " +
 				"</div>                                    ";
-	}
+	}		
