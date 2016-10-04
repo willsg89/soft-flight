@@ -3,7 +3,7 @@
 	});
 
 	function loadTabsProjects() {
-		$.getJSON("http://localhost:3000/api/projects", function( data ) {
+		$.getJSON("http://localhost:3000/api/projects-mock", function( data ) {
 		
 			var projects = [];
 			var details = [];
@@ -34,7 +34,7 @@
 						"	<td>"+detail.ipaName+"</td> " +
 						"	<td>"+detail.link+"</td>     " +
 						"	<td>"+detail.version+"</td>  " +
-						"	<td> <a> <img src=\"ios.png\" </img> </a> </td>  " +
+						"	<td> <a> <img src=\"images/ios.png\" </img> </a> </td>  " +
 						"</tr> ");
 		});
 
