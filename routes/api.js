@@ -10,7 +10,7 @@ var service = require("../services/service.js");
 var mockData = JSON.parse(fs.readFileSync(__dirname + "/../models/list.json", "utf8"));
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
@@ -19,20 +19,20 @@ router.get('/projects-mock', function (req, res, next) {
 });
 
 router.get('/projects', function (req, res, next) {
-	service.method2(function(x){
-		console.log("w: " + x);
-		res.json(x);
+	service.findAllProjetcs(function (data) {
+		res.json(data);
 	});
 });
 
 router.post('/project', function (req, res, next) {
-	console.log(req.body);
-	res.sendStatus(201);
+	service.addProject(req.body, function () {
+		res.sendStatus(201);
+	});
 });
 
-router.get('/install', function(req, res, next) {
-  var manifest_plist = fs.createReadStream(__dirname + "/../models/manifest.plist");
-  manifest_plist.pipe(res);
+router.get('/install', function (req, res, next) {
+  var manifestPlist = fs.createReadStream(__dirname + "/../models/manifest.plist");
+  manifestPlist.pipe(res);
 });
 
 module.exports = router;

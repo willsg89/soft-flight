@@ -1,8 +1,8 @@
 "use strict";
 
 module.exports = {
-    method1: hello,
-    method2: teste
+    addProject: addProject,
+    findAllProjetcs: findAllProjetcs
 }
 
 var sqlite3 = require("sqlite3");
@@ -18,7 +18,7 @@ function init() {
     if (!exists) {
         console.log("Created DB file.");
         fs.openSync(dbFile, "w");
-    } else{
+    } else {
         console.log("DB file already exist.");
     }
 
@@ -28,46 +28,39 @@ function init() {
             db.run(" CREATE TABLE `project` (" +
 	               " `name`	TEXT NOT NULL," +
                 " `id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT );");
-            console.log("==============.");        
+            console.log("==============.");
 
         });
         db.close();
-        console.log("Created tables project and builds.");        
+        console.log("Created tables project and builds.");
     }
 }
 
-function hello() {
-    console.log("xxxxxxxxxxxxxxxxxxxxx");
-}
-
-function teste(successCallback) {
+function addProject(project, successCallback) {
     var db = new sqlite3.Database(dbFile);
     db.serialize(function () {
-        /*
         var stmt = db.prepare("INSERT INTO project (name) VALUES (?)");
-
-        //Insert random data
-        var rnd;
-        for (var i = 0; i < 10; i++) {
-            rnd = Math.floor(Math.random() * 10000000);
-            stmt.run("Thing #" + rnd);
-        }
-        
-
+        stmt.run(project.name);
         stmt.finalize();
-        */
-        var x = []
+        successCallback();
+    });
+    db.close();
+}
+
+function findAllProjetcs(successCallback) {
+    var db = new sqlite3.Database(dbFile);
+    db.serialize(function () {
+        var projetcs = []
         db.each(
             "SELECT id, name FROM project",
-            function (err, row){
-                console.log(row.id + ": " + row.name);
-                x.push(row);
+            function (err, data) {
+                console.log(data.id + ": " + data.name);
+                projetcs.push(data);
             },
             function () {
-                successCallback(x);
+                successCallback(projetcs);
             }
         );
     });
-
     db.close();
 }
